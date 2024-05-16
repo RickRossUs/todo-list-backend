@@ -11,7 +11,8 @@ class NoteViewSet(ModelViewSet):
 
     def get_queryset(self):
         
-        if check := self.request.query_params.get('check'):
+        check = self.request.query_params.get('check')
+        if check:
             if check.lower() == 'true':
                 return Note.objects.filter(user=self.request.user, checked=True).order_by('date')
             else:
